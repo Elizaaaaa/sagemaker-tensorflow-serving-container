@@ -69,6 +69,8 @@ function parse_std_args() {
     aws_region=$(get_default_region)
     aws_account=$(get_aws_account)
 
+    echo $aws_account
+
     while [[ $# -gt 0 ]]; do
     key="$1"
 
