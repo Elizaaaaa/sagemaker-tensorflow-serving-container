@@ -12,8 +12,12 @@ def make_request(data, content_type='application/json', method='predict'):
         'X-Amzn-SageMaker-Custom-Attributes':
             'tfs-model-name=Resnet50v2,tfs-method=%s' % method
     }
+    start_time = datetime.now()
     response = requests.post(BASE_URL, data=data, headers=headers)
-    return json.loads(response.content.decode('utf-8'))
+    end_time = datetime.now()
+    duration = end_time - start_time
+    print('Time cost: {}s'.format(duration.total_seconds()))
+#    return json.loads(response.content.decode('utf-8'))
 
 def post_latency():
     start_time = datetime.now()
@@ -24,12 +28,7 @@ def post_latency():
 
 data = {'instances':np.random.rand(1, 224, 224, 3).tolist()}
 
-start_time = datetime.now()
-
 output = make_request(json.dumps(data))
 
-end_time = datetime.now()
-duration = end_time - start_time
-
-post_latency()
-print('Time cost: {}s'.format(duration.total_seconds()))
+#post_latency()
+#print('Time cost: {}s'.format(duration.total_seconds()))
