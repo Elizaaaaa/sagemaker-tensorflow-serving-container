@@ -36,7 +36,6 @@ timing = []
 
 for each in range(iterations):
     times = p.map(make_request, range(concurrent))
-    #print("see what's the output {}".format(times))
     timing.append((np.min(times), np.mean(times), np.max(times)))
 
 stats = {}
